@@ -415,7 +415,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = ChessGame/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.vistajet.appteamviewerdemo.ChessGame;
+				PRODUCT_BUNDLE_IDENTIFIER = smartprogrammer.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -426,7 +426,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = ChessGame/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.vistajet.appteamviewerdemo.ChessGame;
+				PRODUCT_BUNDLE_IDENTIFIER = smartprogrammer.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -496,6 +496,7 @@
 				3A7C58E51D0D876300C06344 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3A7C58E61D0D876300C06344 /* Build configuration list for PBXNativeTarget "ChessGameTests" */ = {
 			isa = XCConfigurationList;
@@ -504,6 +505,7 @@
 				3A7C58E81D0D876300C06344 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3A7C58E91D0D876300C06344 /* Build configuration list for PBXNativeTarget "ChessGameUITests" */ = {
 			isa = XCConfigurationList;
@@ -512,6 +514,7 @@
 				3A7C58EB1D0D876300C06344 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
