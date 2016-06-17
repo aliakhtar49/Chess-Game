@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		36179E961D14888C00DDF777 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36179E951D14888C00DDF777 /* GameViewController.m */; };
+		36179E9A1D1488DB00DDF777 /* DisplayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 36179E991D1488DB00DDF777 /* DisplayModel.m */; };
+		36179E9D1D14934A00DDF777 /* UIModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 36179E9C1D14934A00DDF777 /* UIModel.m */; };
+		36179EA21D14982A00DDF777 /* BoxModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 36179EA11D14982A00DDF777 /* BoxModel.m */; };
+		36179EA61D14A16D00DDF777 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36179EA51D14A16D00DDF777 /* Images.xcassets */; };
 		3A7C58BB1D0D876300C06344 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7C58BA1D0D876300C06344 /* main.m */; };
 		3A7C58BE1D0D876300C06344 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7C58BD1D0D876300C06344 /* AppDelegate.m */; };
 		3A7C58C11D0D876300C06344 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7C58C01D0D876300C06344 /* ViewController.m */; };
@@ -35,6 +40,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		36179E941D14888C00DDF777 /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
+		36179E951D14888C00DDF777 /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
+		36179E981D1488DB00DDF777 /* DisplayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayModel.h; sourceTree = "<group>"; };
+		36179E991D1488DB00DDF777 /* DisplayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisplayModel.m; sourceTree = "<group>"; };
+		36179E9B1D14934A00DDF777 /* UIModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIModel.h; sourceTree = "<group>"; };
+		36179E9C1D14934A00DDF777 /* UIModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIModel.m; sourceTree = "<group>"; };
+		36179EA01D14982A00DDF777 /* BoxModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxModel.h; sourceTree = "<group>"; };
+		36179EA11D14982A00DDF777 /* BoxModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxModel.m; sourceTree = "<group>"; };
+		36179EA51D14A16D00DDF777 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		3A7C58B61D0D876300C06344 /* ChessGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChessGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A7C58BA1D0D876300C06344 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3A7C58BC1D0D876300C06344 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -78,6 +92,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		36179E971D1488B800DDF777 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				36179E981D1488DB00DDF777 /* DisplayModel.h */,
+				36179E991D1488DB00DDF777 /* DisplayModel.m */,
+				36179E9B1D14934A00DDF777 /* UIModel.h */,
+				36179E9C1D14934A00DDF777 /* UIModel.m */,
+				36179EA01D14982A00DDF777 /* BoxModel.h */,
+				36179EA11D14982A00DDF777 /* BoxModel.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		3A7C58AD1D0D876300C06344 = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +128,7 @@
 		3A7C58B81D0D876300C06344 /* ChessGame */ = {
 			isa = PBXGroup;
 			children = (
+				36179E971D1488B800DDF777 /* Models */,
 				3A7C58BC1D0D876300C06344 /* AppDelegate.h */,
 				3A7C58BD1D0D876300C06344 /* AppDelegate.m */,
 				3A7C58BF1D0D876300C06344 /* ViewController.h */,
@@ -110,6 +138,9 @@
 				3A7C58C71D0D876300C06344 /* LaunchScreen.storyboard */,
 				3A7C58CA1D0D876300C06344 /* Info.plist */,
 				3A7C58B91D0D876300C06344 /* Supporting Files */,
+				36179E941D14888C00DDF777 /* GameViewController.h */,
+				36179E951D14888C00DDF777 /* GameViewController.m */,
+				36179EA51D14A16D00DDF777 /* Images.xcassets */,
 			);
 			path = ChessGame;
 			sourceTree = "<group>";
@@ -243,6 +274,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36179EA61D14A16D00DDF777 /* Images.xcassets in Resources */,
 				3A7C58C91D0D876300C06344 /* LaunchScreen.storyboard in Resources */,
 				3A7C58C61D0D876300C06344 /* Assets.xcassets in Resources */,
 				3A7C58C41D0D876300C06344 /* Main.storyboard in Resources */,
@@ -270,9 +302,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36179E961D14888C00DDF777 /* GameViewController.m in Sources */,
 				3A7C58C11D0D876300C06344 /* ViewController.m in Sources */,
 				3A7C58BE1D0D876300C06344 /* AppDelegate.m in Sources */,
+				36179EA21D14982A00DDF777 /* BoxModel.m in Sources */,
 				3A7C58BB1D0D876300C06344 /* main.m in Sources */,
+				36179E9A1D1488DB00DDF777 /* DisplayModel.m in Sources */,
+				36179E9D1D14934A00DDF777 /* UIModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
