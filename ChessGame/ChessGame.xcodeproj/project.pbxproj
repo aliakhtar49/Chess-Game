@@ -104,6 +104,8 @@
 		36179E971D1488B800DDF777 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3AAFF1421D15C1B90035DE17 /* Board.h */,
+				3AAFF1431D15C1B90035DE17 /* Board.m */,
 				36179E981D1488DB00DDF777 /* DisplayModel.h */,
 				36179E991D1488DB00DDF777 /* DisplayModel.m */,
 				36179E9B1D14934A00DDF777 /* UIModel.h */,
@@ -151,8 +153,6 @@
 				36179E941D14888C00DDF777 /* GameViewController.h */,
 				36179E951D14888C00DDF777 /* GameViewController.m */,
 				36179EA51D14A16D00DDF777 /* Images.xcassets */,
-				3AAFF1421D15C1B90035DE17 /* Board.h */,
-				3AAFF1431D15C1B90035DE17 /* Board.m */,
 			);
 			path = ChessGame;
 			sourceTree = "<group>";

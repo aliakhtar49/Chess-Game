@@ -39,32 +39,47 @@
         case 8:
             return 211;
             break;
+        case 9:
+        return 222;
+        break;
+        case 10:
+        return 233;
+        break;
+        case 11:
+        return 244;
+        break;
+        case 12:
+        return 255;
+        break;
+        case 13:
+        return 266;
+        break;
+        case 14:
+        return 277;
+        break;
+        case 15:
+        return 288;
+        break;
+        case 16:
+        return 311;
+        break;
+        case 17:
+        return 322;
+        break;
         default:
             break;
     }
     return -1;
 }
 +(NSString*)imageName:(NSString*)name{
+    BOOL isUppercase = [[NSCharacterSet uppercaseLetterCharacterSet] characterIsMember:[name characterAtIndex:0]];
+    NSString* co;
+    if(isUppercase){
+        co = @"b";
+    }else co = @"w";
     
-    if([name isEqualToString:@"rook"])
-        return @"rook_black.png";
-    else if([name isEqualToString:@"knight"])
-        return @"knight_black.png";
-    else if([name isEqualToString:@"bishop"])
-        return @"bishop_black.png";
-    else if([name isEqualToString:@"queen"])
-        return @"queen_black.png";
-    else if([name isEqualToString:@"king"])
-        return @"king_black.png";
-    else if([name isEqualToString:@"bishop"])
-        return @"bishop_black.png";
-    else if([name isEqualToString:@"knight"])
-        return @"knight_black.png";
-    else if([name isEqualToString:@"rook"])
-        return @"rook_black.png";
-    else if ([name isEqualToString:@"pawn"]){
-        return @"pawn_black";
-    }
-    return @"";
+    NSString* subject = [NSString stringWithFormat:@"%@%@.png",name,co];
+    return subject;
+    
 }
 @end

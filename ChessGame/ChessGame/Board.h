@@ -2,17 +2,21 @@
 //  Board.h
 //  ChessGame
 //
-//  Created by Ali Akhtar on 6/18/16.
+//  Created by Muzzammil on 6/18/16.
 //  Copyright © 2016 Ali Akhtar. All rights reserved.
 //
-
+#import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
 @protocol BoardDelegate <NSObject>
 
--(void)drawImage:(
+-(void)drawImage;
 
 @end
+
 @interface Board : NSObject
--(void)drawBoard:(__strong NSString* [8][8])chessBoard;
+-(void)drawBoard:(__strong NSString* [8][8])chessBoard view:(UIView*)view;
+
+@property(assign) id <BoardDelegate> delegate;
+
 @end
