@@ -62,6 +62,9 @@
         return @"knight_black.png";
     else if([name isEqualToString:@"rook"])
         return @"rook_black.png";
+    else if ([name isEqualToString:@"pawn"]){
+        return @"pawn_black";
+    }
     return @"";
 }
 @end

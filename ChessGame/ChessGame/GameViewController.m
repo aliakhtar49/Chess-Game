@@ -9,6 +9,7 @@
 #import "GameViewController.h"
 #import "DisplayModel.h"
 #import "UIModel.h"
+#import "Board.h"
 
 @interface GameViewController ()
 
@@ -18,15 +19,37 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSString* chessBoard[8][8] ={
+        @"r",@"k",@"b",@"q",@"a",@"b",@"k",@"r",
+        @"p",@"p",@"p",@"p",@"p",@"p",@"p",@"p",
+        @" ",@" ",@" ",@" ",@" ",@" ",@" ",@" ",
+        @" ",@" ",@" ",@" ",@" ",@" ",@" ",@" ",
+        @"r",@"k",@" ",@" ",@" ",@" ",@" ",@" ",
+        @"A",@"p",@" ",@" ",@" ",@" ",@" ",@" ",
+        @"P",@"P",@"P",@"P",@"P",@"P",@"P",@"P",
+        @"R",@"K",@"B",@"Q",@"A",@"B",@"K",@"R"};
+    Board * board = [[Board alloc]init];
+    [board drawBoard:chessBoard];
     
-    [self draw:0 name:@"rook"];
-    [self draw:1 name:@"knight"];
-    [self draw:2 name:@"bishop"];
-    [self draw:3 name:@"queen"];
-    [self draw:4 name:@"king"];
-    [self draw:5 name:@"bishop"];
-    [self draw:6 name:@"knight"];
-    [self draw:7 name:@"rook"];
+    
+//    [self draw:0 name:@"r"];
+//    [self draw:1 name:@"k"];
+//    [self draw:2 name:@"b"];
+//    [self draw:3 name:@"q"];
+//    [self draw:4 name:@"k"];
+//    [self draw:5 name:@"b"];
+//    [self draw:6 name:@"k"];
+//    [self draw:7 name:@"r"];
+//    [self draw:8 name:@"p"];
+//    [self draw:9 name:@"p"];
+//    [self draw:10 name:@"p"];
+//    [self draw:11 name:@"p"];
+//    [self draw:12 name:@"p"];
+//    [self draw:13 name:@"p"];
+//    [self draw:14 name:@"p"];
+//    [self draw:14 name:@"p"];
+//    [self draw:14 name:@"p"];
+    
 
 }
 - (void)didReceiveMemoryWarning {

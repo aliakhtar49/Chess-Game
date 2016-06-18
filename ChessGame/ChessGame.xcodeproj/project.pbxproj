@@ -20,6 +20,9 @@
 		3A7C58C91D0D876300C06344 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A7C58C71D0D876300C06344 /* LaunchScreen.storyboard */; };
 		3A7C58D41D0D876300C06344 /* ChessGameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7C58D31D0D876300C06344 /* ChessGameTests.m */; };
 		3A7C58DF1D0D876300C06344 /* ChessGameUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7C58DE1D0D876300C06344 /* ChessGameUITests.m */; };
+		3A96AC441D154EB500DD237A /* Pieces.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A96AC431D154EB500DD237A /* Pieces.m */; };
+		3A96AC471D154EC800DD237A /* Pawn.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A96AC461D154EC800DD237A /* Pawn.m */; };
+		3AAFF1441D15C1B90035DE17 /* Board.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAFF1431D15C1B90035DE17 /* Board.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +68,12 @@
 		3A7C58DA1D0D876300C06344 /* ChessGameUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChessGameUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A7C58DE1D0D876300C06344 /* ChessGameUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChessGameUITests.m; sourceTree = "<group>"; };
 		3A7C58E01D0D876300C06344 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3A96AC421D154EB500DD237A /* Pieces.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pieces.h; sourceTree = "<group>"; };
+		3A96AC431D154EB500DD237A /* Pieces.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pieces.m; sourceTree = "<group>"; };
+		3A96AC451D154EC800DD237A /* Pawn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pawn.h; sourceTree = "<group>"; };
+		3A96AC461D154EC800DD237A /* Pawn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pawn.m; sourceTree = "<group>"; };
+		3AAFF1421D15C1B90035DE17 /* Board.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Board.h; sourceTree = "<group>"; };
+		3AAFF1431D15C1B90035DE17 /* Board.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Board.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +137,7 @@
 		3A7C58B81D0D876300C06344 /* ChessGame */ = {
 			isa = PBXGroup;
 			children = (
+				3A96AC411D154E9700DD237A /* Player */,
 				36179E971D1488B800DDF777 /* Models */,
 				3A7C58BC1D0D876300C06344 /* AppDelegate.h */,
 				3A7C58BD1D0D876300C06344 /* AppDelegate.m */,
@@ -141,6 +151,8 @@
 				36179E941D14888C00DDF777 /* GameViewController.h */,
 				36179E951D14888C00DDF777 /* GameViewController.m */,
 				36179EA51D14A16D00DDF777 /* Images.xcassets */,
+				3AAFF1421D15C1B90035DE17 /* Board.h */,
+				3AAFF1431D15C1B90035DE17 /* Board.m */,
 			);
 			path = ChessGame;
 			sourceTree = "<group>";
@@ -169,6 +181,17 @@
 				3A7C58E01D0D876300C06344 /* Info.plist */,
 			);
 			path = ChessGameUITests;
+			sourceTree = "<group>";
+		};
+		3A96AC411D154E9700DD237A /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				3A96AC421D154EB500DD237A /* Pieces.h */,
+				3A96AC431D154EB500DD237A /* Pieces.m */,
+				3A96AC451D154EC800DD237A /* Pawn.h */,
+				3A96AC461D154EC800DD237A /* Pawn.m */,
+			);
+			name = Player;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -302,12 +325,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A96AC441D154EB500DD237A /* Pieces.m in Sources */,
 				36179E961D14888C00DDF777 /* GameViewController.m in Sources */,
 				3A7C58C11D0D876300C06344 /* ViewController.m in Sources */,
 				3A7C58BE1D0D876300C06344 /* AppDelegate.m in Sources */,
+				3AAFF1441D15C1B90035DE17 /* Board.m in Sources */,
 				36179EA21D14982A00DDF777 /* BoxModel.m in Sources */,
 				3A7C58BB1D0D876300C06344 /* main.m in Sources */,
 				36179E9A1D1488DB00DDF777 /* DisplayModel.m in Sources */,
+				3A96AC471D154EC800DD237A /* Pawn.m in Sources */,
 				36179E9D1D14934A00DDF777 /* UIModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
