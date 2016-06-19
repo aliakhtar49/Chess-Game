@@ -29,7 +29,7 @@
         @"P",@"P",@"P",@"P",@"P",@"P",@"P",@"P",
         @"R",@"K",@"B",@"Q",@"A",@"B",@"K",@"R"};
     Board * board = [[Board alloc]init];
-    [board drawBoard:chessBoard];
+    [board drawBoard:chessBoard view:self.view];
     
     
 //    [self draw:0 name:@"r"];
@@ -66,11 +66,5 @@
     // Pass the selected object to the new view controller.
 }
 */
--(void)draw:(int)index name:(NSString*)name{
-    UIModel *uiModel = [UIModel alloc];
-    uiModel.xy = index;
-    uiModel.subject = name;
-    DisplayModel *displayModel = [[DisplayModel alloc]initWithModel:uiModel];
-    [displayModel draw:self.view];
-}
+
 @end
