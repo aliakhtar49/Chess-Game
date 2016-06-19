@@ -14,4 +14,6 @@
 - (id)initWithModel:(UIModel*)model;
 -(void)drawBackground:(int)tag view:(UIView*)view imageName:(NSString*)imageName;
 -(BOOL)draw:(UIView*)view;
+-(void)setButtonsColor:(UIView*)view;
+-(void)drawBackgroundColor:(int)tag view:(UIView*)view color:(UIColor*)color;
 @end

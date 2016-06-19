@@ -19,6 +19,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    DisplayModel *displayModel = [DisplayModel alloc];
+    [displayModel setButtonsColor:self.view];
+    
     NSString* chessBoard[8][8] ={
         @"r",@"k",@"b",@"q",@"a",@"b",@"k",@"r",
         @"p",@"p",@"p",@"p",@"p",@"p",@"p",@"p",
