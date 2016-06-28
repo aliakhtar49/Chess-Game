@@ -89,28 +89,44 @@
    
     [super viewDidLoad];
     globalDepth = 4;
+    kingPositionC = 0;
+    kingPositionL = 0;
     
-    
+  
     
     
     NSString* chessBoard[8][8] ={
        // 0    1    2    3    4    5   6    7
-        @"r",@"k",@"b",@"q",@"a",@"b",@"k",@"r",  // 0
+        @"r",@" ",@"b",@"q",@"a",@"b",@" ",@"r",  // 0
         
         @"p",@"p",@"p",@"p",@"p",@"p",@"p",@"p",  // 1
         
-        @" ",@" ",@" ",@" ",@" ",@" ",@" ",@" ",  // 2
+        @" ",@" ",@"k",@" ",@" ",@" ",@" ",@" ",  // 2
         
-        @" ",@" ",@" ",@"B",@" ",@" ",@" ",@" ",  // 3
+        @" ",@" ",@" ",@" ",@" ",@"A",@" ",@" ",  // 3
         
-        @"P",@"K",@" ",@" ",@" ",@" ",@" ",@" ",  // 4
+        @"P",@" ",@"R",@" ",@" ",@" ",@" ",@" ",  // 4
         
-        @"A",@"P",@" ",@" ",@" ",@" ",@" ",@" ",  // 5
+        @" ",@"P",@" ",@" ",@" ",@" ",@" ",@"K",  // 5
         
         @"P",@"P",@"P",@"P",@"P",@"P",@"P",@"P",  // 6
         
-        @"R",@"K",@"B",@"A",@"Q",@" ",@"K",@"R"}; // 7
+        @"R",@" ",@" ",@" ",@" ",@" ",@" ",@" "}; // 7
     
+        while (!([chessBoard[kingPositionC/8][kingPositionC%8] isEqualToString:@"A"]))
+        
+    {
+        kingPositionC++;
+    }//get King's location
+    MDLog(@"%d",kingPositionC);
+    
+    while (!([chessBoard[kingPositionL/8][kingPositionL%8] isEqualToString:@"a"]))
+        
+    {
+        kingPositionL++;
+    }//get King's location
+    MDLog(@"%d",kingPositionL);
+   
    MDLog(@"%@",[self posibleMoves:chessBoard]);
    
 
@@ -120,20 +136,239 @@
 -(NSString*) posibleMoves:(__strong NSString* [8][8])chessBoard{
     NSString* list=@"";
     for (int i=0; i<64; i++) {
-//        if([chessBoard[i/8][i%8] isEqualToString:@"A"]){
-//            list = [NSString stringWithFormat:@"%@%@",list,[self posibleA:i with:chessBoard]];
-//        }
-//        if([chessBoard[i/8][i%8] isEqualToString:@"Q"]){
-//            list = [NSString stringWithFormat:@"%@%@",list,[self posibleQ:i with:chessBoard]];
-//        }
+        if([chessBoard[i/8][i%8] isEqualToString:@"A"]){
+            list = [NSString stringWithFormat:@"%@%@",list,[self posibleA:i with:chessBoard]];
+        }
+       else if([chessBoard[i/8][i%8] isEqualToString:@"Q"]){
+            list = [NSString stringWithFormat:@"%@%@",list,[self posibleQ:i with:chessBoard]];
+        }
         
-        if([chessBoard[i/8][i%8] isEqualToString:@"B"]){
+        else if([chessBoard[i/8][i%8] isEqualToString:@"B"]){
             list = [NSString stringWithFormat:@"%@%@",list,[self posibleB:i with:chessBoard]];
         }
+        else if([chessBoard[i/8][i%8] isEqualToString:@"R"]){
+                        list = [NSString stringWithFormat:@"%@%@",list,[self posibleR:i with:chessBoard]];
+                    }
+        else if([chessBoard[i/8][i%8] isEqualToString:@"K"]){
+            list = [NSString stringWithFormat:@"%@%@",list,[self posibleK:i with:chessBoard]];
+        }
+        else if([chessBoard[i/8][i%8] isEqualToString:@"P"]){
+            list = [NSString stringWithFormat:@"%@%@",list,[self posibleP:i with:chessBoard]];
+        }
+        
+        
     }
     
     return list;//x1,y1,x2,y2,captured piece
 }
+
+-(NSString*)posibleK:(int)i with:(__strong NSString* [8][8])chessBoard{
+    NSString* list=@"";
+    NSString*oldPiece;
+    int r=i/8, c=i%8;
+    for (int j=-1; j<=1; j+=2) {
+        for (int k=-1; k<=1; k+=2) {
+           
+            
+                    if(((r+j) >=0) && ((r+j) <=7) && ((c+k*2)>=0) && ((c+k*2)<=7)){
+                    BOOL isLowercase = [[NSCharacterSet lowercaseLetterCharacterSet] characterIsMember:[chessBoard[r+j][c+k*2] characterAtIndex:0]];
+                    if (isLowercase || ([chessBoard[r+j][c+k*2] isEqualToString:@" "])) {
+                        
+                            oldPiece=chessBoard[r+j][c+k*2];
+                            chessBoard[r][c]=@" ";
+                            chessBoard[r+j][c+k*2]=@"K";
+                        if ([self kingSafe:chessBoard]) {
+                                list = [NSString stringWithFormat:@"%@%d%d%d%d%@",list,r,c,(r+j),(c+k*2),oldPiece];
+                                // MDLog(@"%@",list);
+                            }
+                            
+                            chessBoard[r][c]=@"K";
+                            chessBoard[r+j][c+k*2]=oldPiece;
+                        
+                    }
+        }
+            if( ((r+j*2) >=0) && ((r+j*2) <=7) && ((c+k)>=0) && ((c+k)<=7) ){
+                   BOOL isLowercase = [[NSCharacterSet lowercaseLetterCharacterSet] characterIsMember:[chessBoard[r+j*2][c+k] characterAtIndex:0]];
+                    if (isLowercase || ([chessBoard[r+j*2][c+k] isEqualToString:@" "])) {
+                        
+                        oldPiece=chessBoard[r+j*2][c+k];
+                        chessBoard[r][c]=@" ";
+                        chessBoard[r+j*2][c+k]=@"K";
+                        if ([self kingSafe:chessBoard]) {
+                            list = [NSString stringWithFormat:@"%@%d%d%d%d%@",list,r,c,(r+j*2),(c+k),oldPiece];
+                            // MDLog(@"%@",list);
+                        }
+                        
+                        chessBoard[r][c]=@"K";
+                        chessBoard[r+j*2][c+k]=oldPiece;
+                        
+                    }
+        }
+        
+                    
+                
+            }
+            
+        }
+    
+    //need to add casting later
+    return list;
+}
+
+-(NSString*)posibleP:(int)i with:(__strong NSString* [8][8])chessBoard{
+    NSString* list=@"";
+    NSString*oldPiece;
+    int r=i/8, c=i%8;
+    for (int j=-1; j<=1; j+=2) {
+       //capture
+        BOOL isLowercase = [[NSCharacterSet lowercaseLetterCharacterSet] characterIsMember:[chessBoard[r-1][c+j] characterAtIndex:0]];
+        if ((isLowercase) && i>=16) {
+            
+                oldPiece=chessBoard[r-1][c+j];
+                chessBoard[r][c]=@" ";
+                chessBoard[r-1][c+j]=@"P";
+                if ([self kingSafe:chessBoard]) {
+                    list = [NSString stringWithFormat:@"%@%d%d%d%d%@",list,r,c,(r-1),(c+j),oldPiece];
+                    
+                }
+                chessBoard[r][c]=@"P";
+                chessBoard[r-1][c+j]=oldPiece;
+            }
+         isLowercase = [[NSCharacterSet lowercaseLetterCharacterSet] characterIsMember:[chessBoard[r-1][c+j] characterAtIndex:0]];
+        //promotion && capture
+        if ((isLowercase) && i<16) {
+           // if (Character.isLowerCase(chessBoard[r-1][c+j].charAt(0)) && i<16) {
+                NSString*temp[4]={@"Q",@"R",@"B",@"K"};
+                for (int k=0; k<4; k++) {
+                    oldPiece=chessBoard[r-1][c+j];
+                    chessBoard[r][c]=@" ";
+                    chessBoard[r-1][c+j]=temp[k];
+                    if ([self kingSafe:chessBoard]) {
+                        //column1,column2,captured-piece,new-piece,P
+                        list = [NSString stringWithFormat:@"%@%d%d%@%@%@",list,c,(c+j),oldPiece,temp[k],@"P"];
+                      
+                    }
+                    chessBoard[r][c]=@"P";
+                    chessBoard[r-1][c+j]=oldPiece;
+                }
+            }
+       
+    }
+    //move one up
+    
+    if (([chessBoard[r-1][c] isEqualToString:@" "]) && i>=16) {
+            oldPiece=chessBoard[r-1][c];
+            chessBoard[r][c]=@" ";
+            chessBoard[r-1][c]=@"P";
+            if ([self kingSafe:chessBoard]) {
+                list = [NSString stringWithFormat:@"%@%d%d%d%d%@",list,r,c,(r-1),(c),oldPiece];
+                            }
+            chessBoard[r][c]=@"P";
+            chessBoard[r-1][c]=oldPiece;
+        }
+   
+    //promotion && no capture
+    if (([chessBoard[r-1][c] isEqualToString:@" "]) && i<16) {
+    
+            NSString*temp[4]={@"Q",@"R",@"B",@"K"};
+            for (int k=0; k<4; k++) {
+                oldPiece=chessBoard[r-1][c];
+                chessBoard[r][c]=@" ";
+                chessBoard[r-1][c]=temp[k];
+                if ([self kingSafe:chessBoard]) {
+                    //column1,column2,captured-piece,new-piece,P
+                     list = [NSString stringWithFormat:@"%@%d%d%@%@%@",list,c,(c),oldPiece,temp[k],@"P"];
+                  
+                }
+                chessBoard[r][c]=@"P";
+                chessBoard[r-1][c]=oldPiece;
+            }
+        }
+    
+    //move two up
+    
+    if (([chessBoard[r-1][c] isEqualToString:@" "]) && ([chessBoard[r-2][c] isEqualToString:@" "]) && i>=48) {
+            oldPiece=chessBoard[r-2][c];
+            chessBoard[r][c]=@" ";
+            chessBoard[r-2][c]=@"P";
+            if ([self kingSafe:chessBoard]) {
+                 list = [NSString stringWithFormat:@"%@%d%d%d%d%@",list,r,c,(r-2),(c),oldPiece];
+            }
+            chessBoard[r][c]=@"P";
+            chessBoard[r-2][c]=oldPiece;
+        }
+    
+    return list;
+}
+//Rock
+-(NSString*)posibleR:(int)i with:(__strong NSString* [8][8])chessBoard{
+    NSString* list=@"";
+    NSString*oldPiece;
+    int r=i/8, c=i%8;
+    int temp=1;
+    for (int j=-1; j<=1; j++) {
+        for (int k=-1; k<=1; k++) {
+            if(j==0 || k==0){
+                if(((r+temp*j) >=0) && ((r+(temp*j)) <=7) && ((c+(temp*k))>=0) && ((c+(temp*k))<=7)){
+                    
+                    
+                    while(([chessBoard[r+(temp*j)][c+(temp*k)] isEqualToString:@" "]))
+                        
+                    {
+                        int a = r+ (temp*j);
+                        int b = c+(temp*k);
+                        if( ((a>=0) && (a<=7)) &&( (b >= 0) && (b <= 7)) ){
+                            
+                            if( j==0 && k==1 && temp == 4){
+                                NSLog(@"ddjd");
+                            }
+                            
+                            
+                            oldPiece=chessBoard[r+temp*j][c+temp*k];
+                            chessBoard[r][c]=@" ";
+                            chessBoard[r+temp*j][c+temp*k]=@"Q";
+                            if ([self kingSafe:chessBoard]) {
+                                list = [NSString stringWithFormat:@"%@%d%d%d%d%@",list,r,c,(r+temp*j),(c+temp*k),oldPiece];
+                                // MDLog(@"%@",list);
+                            }
+                            
+                            chessBoard[r][c]=@"Q";
+                            chessBoard[r+temp*j][c+temp*k]=oldPiece;
+                            temp++;
+                            if(!(((r+temp*j) >=0) && ((r+(temp*j)) <=7) && ((c+(temp*k))>=0) && ((c+(temp*k))<=7))){
+                                break;
+                            }
+                        }
+                        else{
+                            break;
+                        }
+                    }
+                    if(((r+temp*j) >=0)&&((r+(temp*j)) <=7)&&((c+(temp*k))>=0)&&((c+(temp*k))<=7)){
+                    BOOL isLowercase = [[NSCharacterSet lowercaseLetterCharacterSet] characterIsMember:[chessBoard[r+(temp*j)][c+(temp*k)] characterAtIndex:0]];
+                    if (isLowercase) {
+                        
+                            oldPiece=chessBoard[r+temp*j][c+temp*k];
+                            chessBoard[r][c]=@" ";
+                            chessBoard[r+temp*j][c+temp*k]=@"Q";
+                            if ([self kingSafe:chessBoard]) {
+                                list = [NSString stringWithFormat:@"%@%d%d%d%d%@",list,r,c,(r+temp*j),(c+temp*k),oldPiece];
+                                // MDLog(@"%@",list);
+                            }
+                            
+                            chessBoard[r][c]=@"Q";
+                            chessBoard[r+temp*j][c+temp*k]=oldPiece;
+                        }
+                    }
+                    
+                    temp=1;
+                }
+            }
+            
+        }
+    }
+    return list;
+}
+
 //Bishop
 -(NSString*)posibleB:(int)i with:(__strong NSString* [8][8])chessBoard{
     NSString* list=@"";
@@ -161,7 +396,7 @@
                         oldPiece=chessBoard[r+temp*j][c+temp*k];
                         chessBoard[r][c]=@" ";
                         chessBoard[r+temp*j][c+temp*k]=@"Q";
-                        if ([self kingSafe]) {
+                        if([self kingSafe:chessBoard]){
                             list = [NSString stringWithFormat:@"%@%d%d%d%d%@",list,r,c,(r+temp*j),(c+temp*k),oldPiece];
                             // MDLog(@"%@",list);
                         }
@@ -181,7 +416,7 @@
                         oldPiece=chessBoard[r+temp*j][c+temp*k];
                         chessBoard[r][c]=@" ";
                         chessBoard[r+temp*j][c+temp*k]=@"Q";
-                        if ([self kingSafe]) {
+                        if ([self kingSafe:chessBoard]) {
                             list = [NSString stringWithFormat:@"%@%d%d%d%d%@",list,r,c,(r+temp*j),(c+temp*k),oldPiece];
                             // MDLog(@"%@",list);
                         }
@@ -217,7 +452,7 @@
                     int b = c+(temp*k);
                     if( ((a>=0) && (a<=7)) &&( (b >= 0) && (b <= 7)) ){
                    
-                    if( j==0 && k==1 && temp == 4){
+                    if( j==0 && k==1 && temp == 3){
                         NSLog(@"ddjd");
                     }
                     
@@ -225,7 +460,7 @@
                     oldPiece=chessBoard[r+temp*j][c+temp*k];
                     chessBoard[r][c]=@" ";
                     chessBoard[r+temp*j][c+temp*k]=@"Q";
-                    if ([self kingSafe]) {
+                    if ([self kingSafe:chessBoard]) {
                         list = [NSString stringWithFormat:@"%@%d%d%d%d%@",list,r,c,(r+temp*j),(c+temp*k),oldPiece];
                        // MDLog(@"%@",list);
                     }
@@ -233,19 +468,23 @@
                     chessBoard[r][c]=@"Q";
                     chessBoard[r+temp*j][c+temp*k]=oldPiece;
                     temp++;
+                          if(!(((r+temp*j) >=0) && ((r+(temp*j)) <=7) && ((c+(temp*k))>=0) && ((c+(temp*k))<=7))){
+                             break;
+                         }
                 }
                     else{
                         break;
                     }
                 }
+                 if(((r+temp*j) >=0)&&((r+(temp*j)) <=7)&&((c+(temp*k))>=0)&&((c+(temp*k))<=7)){
                 
                      BOOL isLowercase = [[NSCharacterSet lowercaseLetterCharacterSet] characterIsMember:[chessBoard[r+(temp*j)][c+(temp*k)] characterAtIndex:0]];
                 if (isLowercase) {
-                    if(((r+temp*j) >=0)&&((r+(temp*j)) <=7)&&((c+(temp*k))>=0)&&((c+(temp*k))<=7)){
+                   
                     oldPiece=chessBoard[r+temp*j][c+temp*k];
                     chessBoard[r][c]=@" ";
                     chessBoard[r+temp*j][c+temp*k]=@"Q";
-                    if ([self kingSafe]) {
+                    if ([self kingSafe:chessBoard]) {
                         list = [NSString stringWithFormat:@"%@%d%d%d%d%@",list,r,c,(r+temp*j),(c+temp*k),oldPiece];
                         // MDLog(@"%@",list);
                     }
@@ -270,7 +509,8 @@
     for (int j=0; j<9; j++) {
     if (j!=4) {
         if((r-1+j/3) >=0 && (c-1+j%3) >=0){
-                                @try {
+            
+                                     if(((r-1+j/3) >=0) && ((r-1+j/3) <=7) && ((c-1+j%3)>=0) && ((c-1+j%3)<=7)){
                                    BOOL isLowercase = [[NSCharacterSet lowercaseLetterCharacterSet] characterIsMember:[chessBoard[r-1+j/3][c-1+j%3] characterAtIndex:0]];
                                     if (isLowercase || ([chessBoard[r-1+j/3][c-1+j%3] isEqualToString:@" "])) {
                                         oldPiece=chessBoard[r-1+j/3][c-1+j%3];
@@ -278,19 +518,15 @@
                                         chessBoard[r-1+j/3][c-1+j%3]=@"A";
                                         int kingTemp=kingPositionC;
                                         kingPositionC=i+(j/3)*8+j%3-9;
-                                        if ([self kingSafe]) {
+                                        if ([self kingSafe:chessBoard]) {
                                             list = [NSString stringWithFormat:@"%@%d%d%d%d%@",list,r,c,(r-1+j/3),(c-1+j%3),oldPiece];
                                         }
                                         chessBoard[r][c]=@"A";
                                         chessBoard[r-1+j/3][c-1+j%3]=oldPiece;
                                         kingPositionC=kingTemp;
                                     }
-                                } @catch (NSException *e) {
-                                    NSLog(@"%@Exception",e);
-                                }
-        @finally {
-                    }
-        
+                                     }
+            
     
         
                             }
@@ -299,7 +535,114 @@
                         //need to add casting later
                         return list;
 }
--(BOOL)kingSafe{
+-(BOOL)kingSafe:(__strong NSString* [8][8])chessBoard{
+    //bishop/queen
+    int temp=1;
+    int r  = kingPositionC/8;
+    int c =kingPositionC%8;
+    for (int i=-1; i<=1; i+=2) {
+        for (int j=-1; j<=1; j+=2) {
+            
+            if(((r+temp*i) >=0) && ((r+temp*i) <=7) && ((c+temp*j)>=0) && ((c+temp*j)<=7)){
+            @try {
+                
+                while(([chessBoard[r+temp*i][c+temp*j] isEqualToString:@" "])){
+                    temp++;
+                    if(!(((r+temp*i) >=0)&&(c+temp*i) <=7)&&(c+temp*j>=0)&&((c+temp*j)<=7)){
+                        break;
+                    }
+                
+                }
+                if(((r+temp*i) >=0) && ((r+temp*i) <=7) && ((c+temp*j)>=0) && ((c+temp*j)<=7)){
+                if(([chessBoard[r+temp*i][c+temp*j] isEqualToString:@"b"]) || ([chessBoard[r+temp*i][c+temp*j] isEqualToString:@"q"]) )
+                {
+                    return false;
+                }
+                }
+            } @catch (NSException* e) {}
+            temp=1;
+        }
+        }
+    }
+    //rook/queen
+    for (int i=-1; i<=1; i+=2) {
+        
+            if(((r) >=0) && ((r) <=7) && ((c+temp*i)>=0) && ((c+temp*i)<=7)){
+            while(([chessBoard[r][c+temp*i] isEqualToString:@" "])){
+                temp++;
+                if(!(((r) >=0) && ((r) <=7) && ((c+temp*i)>=0) && ((c+temp*i)<=7))){
+                    break;
+                }
+            }
+                if(((r) >=0) && ((r) <=7) && ((c+temp*i)>=0) && ((c+temp*i)<=7)){
+            if(([chessBoard[r][c+temp*i] isEqualToString:@"r"]) || ([chessBoard[r][c+temp*i] isEqualToString:@"q"]) )
+            {
+                return false;
+            }
+                }
+        }
+        temp=1;
+    
+        @try {
+            if((((r+temp*i) >=0) && ((r+temp*i) <=7) && ((c)>=0) && ((c)<=7))){
+            
+            while(([chessBoard[r+temp*i][c] isEqualToString:@" "])){
+                temp++;
+                if(!(((r+temp*i) >=0) && ((r+temp*i) <=7) && ((c)>=0) && ((c)<=7))){
+                    break;
+                }
+            }if((((r+temp*i) >=0) && ((r+temp*i) <=7) && ((c)>=0) && ((c)<=7))){
+            if(([chessBoard[r+temp*i][c] isEqualToString:@"r"]) || ([chessBoard[r+temp*i][c] isEqualToString:@"q"]) )
+            {
+                return false;
+            }
+            }
+        }
+
+        } @catch (NSException* e) {}
+        temp=1;
+    }
+    
+    
+    //knight
+    for (int i=-1; i<=1; i+=2) {
+        for (int j=-1; j<=1; j+=2) {
+          
+            if((((r+i) >=0) && ((r+i) <=7) && ((c+j*2)>=0) && ((c+j*2)<=7) && (r+i*2>=0) && (r+i*2<=7) && (c+j>=0) && (c+j<=7) )){
+            if( ([chessBoard[r+i][c+j*2] isEqualToString:@"k"]) || ([chessBoard[r+i*2][c+j] isEqualToString:@"k"])){
+                return false;
+                
+            }
+            }
+           
+        }
+    }
+    
+    
+    //pawn
+    if (kingPositionC>=16) {
+        if((((r-1) >=0) && ((r-1) <=7) && ((c-1)>=0) && ((c-1)<=7) && (c+1>=0) && (c+1<=7))){
+            if( ([chessBoard[r-1][c-1] isEqualToString:@"p"]) || ([chessBoard[r-1][c+1] isEqualToString:@"p"])){
+                return false;
+                
+            }
+        }
+        
+       
+        //king
+        for (int i=-1; i<=1; i++) {
+            for (int j=-1; j<=1; j++) {
+                if (i!=0 || j!=0) {
+                    if((((r+i) >=0) && ((r+i) <=7) && ((c+j)>=0) && ((c+j)<=7))){
+                    if( ([chessBoard[r+i][c+j] isEqualToString:@"a"])){
+                        return false;
+                    }
+                        
+                    }
+                }
+            }
+        }
+    }
     return  YES;
 }
 - (void) f:(__strong NSString* [8][8])a{
