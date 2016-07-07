@@ -20,6 +20,8 @@
 		3A7C58C91D0D876300C06344 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A7C58C71D0D876300C06344 /* LaunchScreen.storyboard */; };
 		3A7C58D41D0D876300C06344 /* ChessGameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7C58D31D0D876300C06344 /* ChessGameTests.m */; };
 		3A7C58DF1D0D876300C06344 /* ChessGameUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7C58DE1D0D876300C06344 /* ChessGameUITests.m */; };
+		3A85B6231D2D399C0050A5BD /* ChessBoardCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A85B6221D2D399C0050A5BD /* ChessBoardCustomView.m */; };
+		3A85B6251D2D60570050A5BD /* ChessPieces.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A85B6241D2D60570050A5BD /* ChessPieces.png */; };
 		3A96AC441D154EB500DD237A /* Pieces.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A96AC431D154EB500DD237A /* Pieces.m */; };
 		3A96AC471D154EC800DD237A /* Pawn.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A96AC461D154EC800DD237A /* Pawn.m */; };
 		3AAFF1441D15C1B90035DE17 /* Board.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAFF1431D15C1B90035DE17 /* Board.m */; };
@@ -68,6 +70,9 @@
 		3A7C58DA1D0D876300C06344 /* ChessGameUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChessGameUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A7C58DE1D0D876300C06344 /* ChessGameUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChessGameUITests.m; sourceTree = "<group>"; };
 		3A7C58E01D0D876300C06344 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3A85B6211D2D399C0050A5BD /* ChessBoardCustomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChessBoardCustomView.h; sourceTree = "<group>"; };
+		3A85B6221D2D399C0050A5BD /* ChessBoardCustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChessBoardCustomView.m; sourceTree = "<group>"; };
+		3A85B6241D2D60570050A5BD /* ChessPieces.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChessPieces.png; sourceTree = "<group>"; };
 		3A96AC421D154EB500DD237A /* Pieces.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pieces.h; sourceTree = "<group>"; };
 		3A96AC431D154EB500DD237A /* Pieces.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pieces.m; sourceTree = "<group>"; };
 		3A96AC451D154EC800DD237A /* Pawn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pawn.h; sourceTree = "<group>"; };
@@ -139,6 +144,7 @@
 		3A7C58B81D0D876300C06344 /* ChessGame */ = {
 			isa = PBXGroup;
 			children = (
+				3A85B6241D2D60570050A5BD /* ChessPieces.png */,
 				3A96AC411D154E9700DD237A /* Player */,
 				36179E971D1488B800DDF777 /* Models */,
 				3A7C58BC1D0D876300C06344 /* AppDelegate.h */,
@@ -153,6 +159,8 @@
 				36179E941D14888C00DDF777 /* GameViewController.h */,
 				36179E951D14888C00DDF777 /* GameViewController.m */,
 				36179EA51D14A16D00DDF777 /* Images.xcassets */,
+				3A85B6211D2D399C0050A5BD /* ChessBoardCustomView.h */,
+				3A85B6221D2D399C0050A5BD /* ChessBoardCustomView.m */,
 			);
 			path = ChessGame;
 			sourceTree = "<group>";
@@ -299,6 +307,7 @@
 			files = (
 				36179EA61D14A16D00DDF777 /* Images.xcassets in Resources */,
 				3A7C58C91D0D876300C06344 /* LaunchScreen.storyboard in Resources */,
+				3A85B6251D2D60570050A5BD /* ChessPieces.png in Resources */,
 				3A7C58C61D0D876300C06344 /* Assets.xcassets in Resources */,
 				3A7C58C41D0D876300C06344 /* Main.storyboard in Resources */,
 			);
@@ -333,6 +342,7 @@
 				36179EA21D14982A00DDF777 /* BoxModel.m in Sources */,
 				3A7C58BB1D0D876300C06344 /* main.m in Sources */,
 				36179E9A1D1488DB00DDF777 /* DisplayModel.m in Sources */,
+				3A85B6231D2D399C0050A5BD /* ChessBoardCustomView.m in Sources */,
 				3A96AC471D154EC800DD237A /* Pawn.m in Sources */,
 				36179E9D1D14934A00DDF777 /* UIModel.m in Sources */,
 			);
