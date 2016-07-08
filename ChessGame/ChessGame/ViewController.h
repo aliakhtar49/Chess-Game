@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController{
+#import "ChessBoardCustomView.h"
+@interface ViewController : UIViewController<ChessBoardCustomViewDelegate>{
+    
     
 }
 
+@property (weak, nonatomic) IBOutlet ChessBoardCustomView *myBoardView;
 
 @end
 

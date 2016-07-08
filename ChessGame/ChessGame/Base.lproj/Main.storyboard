@@ -25,7 +25,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ent-uf-Lm2" customClass="ChessBoardCustomView">
-                                <rect key="frame" x="1" y="132" width="318" height="436"/>
+                                <rect key="frame" x="0.0" y="132" width="320" height="436"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="436" id="LWz-q1-I16"/>
@@ -42,12 +42,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Ent-uf-Lm2" secondAttribute="trailing" constant="1" id="Ls4-eY-zcn"/>
+                            <constraint firstAttribute="trailing" secondItem="Ent-uf-Lm2" secondAttribute="trailing" id="Ls4-eY-zcn"/>
                             <constraint firstItem="iMd-SB-Ia2" firstAttribute="top" secondItem="Ent-uf-Lm2" secondAttribute="bottom" id="r7Y-8z-L67"/>
-                            <constraint firstItem="Ent-uf-Lm2" firstAttribute="leading" secondItem="Fwh-x3-puJ" secondAttribute="leading" constant="1" id="vK5-Ia-2MU"/>
+                            <constraint firstItem="Ent-uf-Lm2" firstAttribute="leading" secondItem="Fwh-x3-puJ" secondAttribute="leading" id="vK5-Ia-2MU"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="fq4-sX-cQj"/>
+                    <connections>
+                        <outlet property="myBoardView" destination="Ent-uf-Lm2" id="xsF-zh-CFd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HeR-Ok-3KF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

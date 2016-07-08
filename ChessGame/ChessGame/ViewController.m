@@ -58,12 +58,44 @@
     int kingTemp=kingPositionC;
     kingPositionC=63-kingPositionL;
     kingPositionL=63-kingTemp;
+     [_myBoardView initWith:chessBoard];
+   
+}
+-(void)moveHappened:(int)xPoition and:(int)yPosition withNewX:(int)xNewPosition withNewY:(int)yNewPosition chessArray:(NSString *__strong (*)[8])chessBoard{
+    NSString* dragMove;
+    if (xNewPosition==0 && xPoition==1 && ([chessBoard[xPoition][yPosition]isEqualToString:@"P"])) {
+        //pawn promotion
+        dragMove = [NSString stringWithFormat:@"%d%d%@QP",yPosition,yNewPosition,chessBoard[xNewPosition][yNewPosition]];
+    } else {
+        //regular move
+        
+        dragMove = [NSString stringWithFormat:@"%d%d%d%d%@",xPoition,yPosition,xNewPosition,yNewPosition,chessBoard[xNewPosition][yNewPosition]];
+     
+    }
+    NSString* userPosibilities=[self posibleMoves:chessBoard];
+    if([[userPosibilities stringByReplacingOccurrencesOfString:dragMove withString:@""] length] < userPosibilities.length){
+    
+        [self makeMove:dragMove with:chessBoard];
+        [self flipBoard:chessBoard];
+            for(int i = 0;i<8;i++){
+                for(int j=0;j<8;j++){
+                    printf("\"%s\"\t",[chessBoard[i][j] UTF8String]);
+                }
+                printf("\n");
+            }
+        printf("\n\n\n\n");
+        NSLog(@"%@",[self alphaBeta:globalDepth withFirst:1000000 withSecond:-1000000 withThird:@" " withFour:0 withFive:chessBoard]);
+        [self makeMove:[self alphaBeta:globalDepth withFirst:1000000 withSecond:-1000000 withThird:@" " withFour:0 withFive:chessBoard] with:chessBoard];
+        [self flipBoard:chessBoard];
+        
+    }
    
 }
 
 -(NSString*)alphaBeta:(int)depth withFirst:(int)beta withSecond:(int)alpha withThird:(NSString*)move withFour:(int)player withFive:(__strong NSString* [8][8])chessBoard{
     //return in the form of 1234b##########
     //String list=posibleMoves();
+    
     NSString* list=[self posibleMoves:chessBoard];
     if (depth==0 || list.length ==0) {
         return [NSString stringWithFormat:@"%@%d",move,([self rating]*(player*2-1))];//*(player*2-1))
@@ -87,10 +119,13 @@
         
         [self makeMove:[list substringWithRange:NSMakeRange(i, 5)] with:chessBoard];
         [self flipBoard:chessBoard];
+        
+
         NSString* returnString =[self alphaBeta:depth-1 withFirst:beta withSecond:alpha withThird:[list substringWithRange:NSMakeRange(i, 5)] withFour:player withFive:chessBoard];
         int value = [[returnString substringWithRange:NSMakeRange(5, 1)] intValue];
       
         [self flipBoard:chessBoard];
+        
         [self undoMove:[list substringWithRange:NSMakeRange(i, 5)]with:chessBoard];
         if (player==0) {
             if (value<=beta) {beta=value; if (depth==globalDepth) {move=[returnString substringWithRange:NSMakeRange(0, 5)];}}
@@ -113,18 +148,11 @@
 
 -(int)rating{
     return 0;
-    int a = scores_array[scores_arry_count];
-    scores_arry_count++;
-    return a;
+//    int a = scores_array[scores_arry_count];
+//    scores_arry_count++;
+//    return a;
 }
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 1) {
-        NSString *name = [alertView textFieldAtIndex:0].text;
-        temp_input = [name intValue];
-        MDLog(@"%d",[name intValue]);
-        // Insert whatever needs to be done with "name"
-    }
-}
+
 - (void)viewDidLoad {
    
     
@@ -132,6 +160,56 @@
     
    
     [super viewDidLoad];
+    
+    
+    [_myBoardView setDelegate:self];
+    
+        globalDepth = 4;
+        kingPositionC = 0;
+        kingPositionL = 0;
+    
+        NSString* chessBoard[8][8] ={
+           // 0    1    2    3    4    5   6    7
+            @"r",@"k",@"b",@"q",@"a",@"b",@"k",@"r",  // 0
+    
+            @"p",@"p",@"p",@"p",@"p",@"p",@"p",@"p",  // 1
+    
+            @" ",@" ",@" ",@" ",@" ",@" ",@" ",@" ",  // 2
+    
+            @" ",@" ",@" ",@" ",@" ",@" ",@" ",@" ",  // 3
+    
+            @" ",@" ",@" ",@" ",@" ",@" ",@" ",@" ",  // 4
+    
+            @" ",@" ",@" ",@" ",@" ",@" ",@" ",@" ",  // 5
+    
+            @"P",@"P",@"P",@"P",@"P",@"P",@"P",@"P",  // 6
+    
+            @"R",@"K",@"B",@"Q",@"A",@"B",@"K",@"R"}; // 7
+  //  ChessBoardCustomView *myView = [self.view.subviews objectAtIndex:1];
+   // [myView initWith:chessBoard];
+    while (!([chessBoard[kingPositionC/8][kingPositionC%8] isEqualToString:@"A"]))
+        
+    {
+        kingPositionC++;
+    }
+    
+    while (!([chessBoard[kingPositionL/8][kingPositionL%8] isEqualToString:@"a"]))
+        
+    {
+        kingPositionL++;
+    }
+    [_myBoardView initWith:chessBoard];
+    
+    
+    //[myView initWith:chessBoard];
+    //[myView setNeedsDisplay];
+    
+    
+  //  [self makeMove:[self alphaBeta:globalDepth withFirst:1000000 withSecond:-1000000 withThird:@" " withFour:0 withFive:chessBoard] with:chessBoard];
+  //  [self flipBoard:chessBoard];
+   
+   //[chessBoardCustomView drawRect:chessBoardCustomView.frame];
+   
     
      
     
@@ -314,7 +392,7 @@
         if ((isLowercase) && i<16) {
            // if (Character.isLowerCase(chessBoard[r-1][c+j].charAt(0)) && i<16) {
                 NSString*temp[4]={@"Q",@"R",@"B",@"K"};
-                for (int k=0; k<4; k++) {
+                for (int k=0; k<1; k++) {
                     oldPiece=chessBoard[r-1][c+j];
                     chessBoard[r][c]=@" ";
                     chessBoard[r-1][c+j]=temp[k];
@@ -347,7 +425,7 @@
     if (([chessBoard[r-1][c] isEqualToString:@" "]) && i<16) {
     
             NSString*temp[4]={@"Q",@"R",@"B",@"K"};
-            for (int k=0; k<4; k++) {
+            for (int k=0; k<1; k++) {
                 oldPiece=chessBoard[r-1][c];
                 chessBoard[r][c]=@" ";
                 chessBoard[r-1][c]=temp[k];
@@ -404,13 +482,13 @@
                             
                             oldPiece=chessBoard[r+temp*j][c+temp*k];
                             chessBoard[r][c]=@" ";
-                            chessBoard[r+temp*j][c+temp*k]=@"Q";
+                            chessBoard[r+temp*j][c+temp*k]=@"R";
                             if ([self kingSafe:chessBoard]) {
                                 list = [NSString stringWithFormat:@"%@%d%d%d%d%@",list,r,c,(r+temp*j),(c+temp*k),oldPiece];
                                 // MDLog(@"%@",list);
                             }
                             
-                            chessBoard[r][c]=@"Q";
+                            chessBoard[r][c]=@"R";
                             chessBoard[r+temp*j][c+temp*k]=oldPiece;
                             temp++;
                             if(!(((r+temp*j) >=0) && ((r+(temp*j)) <=7) && ((c+(temp*k))>=0) && ((c+(temp*k))<=7))){
@@ -427,13 +505,13 @@
                         
                             oldPiece=chessBoard[r+temp*j][c+temp*k];
                             chessBoard[r][c]=@" ";
-                            chessBoard[r+temp*j][c+temp*k]=@"Q";
+                            chessBoard[r+temp*j][c+temp*k]=@"R";
                             if ([self kingSafe:chessBoard]) {
                                 list = [NSString stringWithFormat:@"%@%d%d%d%d%@",list,r,c,(r+temp*j),(c+temp*k),oldPiece];
                                 // MDLog(@"%@",list);
                             }
                             
-                            chessBoard[r][c]=@"Q";
+                            chessBoard[r][c]=@"R";
                             chessBoard[r+temp*j][c+temp*k]=oldPiece;
                         }
                     }
@@ -473,33 +551,36 @@
                         
                         oldPiece=chessBoard[r+temp*j][c+temp*k];
                         chessBoard[r][c]=@" ";
-                        chessBoard[r+temp*j][c+temp*k]=@"Q";
+                        chessBoard[r+temp*j][c+temp*k]=@"B";
                         if([self kingSafe:chessBoard]){
                             list = [NSString stringWithFormat:@"%@%d%d%d%d%@",list,r,c,(r+temp*j),(c+temp*k),oldPiece];
                             // MDLog(@"%@",list);
                         }
                         
-                        chessBoard[r][c]=@"Q";
+                        chessBoard[r][c]=@"B";
                         chessBoard[r+temp*j][c+temp*k]=oldPiece;
                         temp++;
+                        if(!(((r+temp*j) >=0) && ((r+(temp*j)) <=7) && ((c+(temp*k))>=0) && ((c+(temp*k))<=7))){
+                            break;
+                        }
                     }
                     else{
                         break;
                     }
                 }
-                
+                if(((r+temp*j) >=0)&&((r+(temp*j)) <=7)&&((c+(temp*k))>=0)&&((c+(temp*k))<=7)){
                 BOOL isLowercase = [[NSCharacterSet lowercaseLetterCharacterSet] characterIsMember:[chessBoard[r+(temp*j)][c+(temp*k)] characterAtIndex:0]];
                 if (isLowercase) {
-                    if(((r+temp*j) >=0)&&((r+(temp*j)) <=7)&&((c+(temp*k))>=0)&&((c+(temp*k))<=7)){
+                    
                         oldPiece=chessBoard[r+temp*j][c+temp*k];
                         chessBoard[r][c]=@" ";
-                        chessBoard[r+temp*j][c+temp*k]=@"Q";
+                        chessBoard[r+temp*j][c+temp*k]=@"B";
                         if ([self kingSafe:chessBoard]) {
                             list = [NSString stringWithFormat:@"%@%d%d%d%d%@",list,r,c,(r+temp*j),(c+temp*k),oldPiece];
                             // MDLog(@"%@",list);
                         }
                         
-                        chessBoard[r][c]=@"Q";
+                        chessBoard[r][c]=@"B";
                         chessBoard[r+temp*j][c+temp*k]=oldPiece;
                     }
                 }
@@ -749,6 +830,8 @@
         chessBoard[1][[[move substringWithRange:NSMakeRange(0, 1)] integerValue]]=@" ";
         chessBoard[0][[[move substringWithRange:NSMakeRange(1, 1)] integerValue]]=[move substringWithRange:NSMakeRange(3, 1)];
     }
+    [_myBoardView initWith:chessBoard];
+    //[_myBoardView setNeedsDisplay];
   
 }
 -(void)undoMove:(NSString *) move with:(__strong NSString* [8][8])chessBoard{
@@ -767,7 +850,7 @@
     }
     else{
         chessBoard[1][[[move substringWithRange:NSMakeRange(0, 1)] integerValue]]=@"P";
-        chessBoard[0][[[move substringWithRange:NSMakeRange(1, 1)] integerValue]]=[move substringWithRange:NSMakeRange(4, 1)];
+        chessBoard[0][[[move substringWithRange:NSMakeRange(1, 1)] integerValue]]=[move substringWithRange:NSMakeRange(2, 1)];
     }
     
 }

@@ -125,8 +125,8 @@
     BOOL isUppercase = [[NSCharacterSet uppercaseLetterCharacterSet] characterIsMember:[name characterAtIndex:0]];
     NSString* co;
     if(isUppercase){
-        co = @"b";
-    }else co = @"w";
+        co = @"w";
+    }else co = @"b";
     
     NSString* subject = [NSString stringWithFormat:@"%@%@.png",[name lowercaseString],co];
     return subject;
