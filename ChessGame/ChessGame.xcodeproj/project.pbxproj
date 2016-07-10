@@ -22,6 +22,7 @@
 		3A7C58DF1D0D876300C06344 /* ChessGameUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7C58DE1D0D876300C06344 /* ChessGameUITests.m */; };
 		3A85B6231D2D399C0050A5BD /* ChessBoardCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A85B6221D2D399C0050A5BD /* ChessBoardCustomView.m */; };
 		3A85B6251D2D60570050A5BD /* ChessPieces.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A85B6241D2D60570050A5BD /* ChessPieces.png */; };
+		3A91277D1D30005D00E6A662 /* Rating.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A91277C1D30005D00E6A662 /* Rating.m */; };
 		3A96AC441D154EB500DD237A /* Pieces.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A96AC431D154EB500DD237A /* Pieces.m */; };
 		3A96AC471D154EC800DD237A /* Pawn.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A96AC461D154EC800DD237A /* Pawn.m */; };
 		3AAFF1441D15C1B90035DE17 /* Board.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAFF1431D15C1B90035DE17 /* Board.m */; };
@@ -73,6 +74,8 @@
 		3A85B6211D2D399C0050A5BD /* ChessBoardCustomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChessBoardCustomView.h; sourceTree = "<group>"; };
 		3A85B6221D2D399C0050A5BD /* ChessBoardCustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChessBoardCustomView.m; sourceTree = "<group>"; };
 		3A85B6241D2D60570050A5BD /* ChessPieces.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChessPieces.png; sourceTree = "<group>"; };
+		3A91277B1D30005D00E6A662 /* Rating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rating.h; sourceTree = "<group>"; };
+		3A91277C1D30005D00E6A662 /* Rating.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rating.m; sourceTree = "<group>"; };
 		3A96AC421D154EB500DD237A /* Pieces.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pieces.h; sourceTree = "<group>"; };
 		3A96AC431D154EB500DD237A /* Pieces.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pieces.m; sourceTree = "<group>"; };
 		3A96AC451D154EC800DD237A /* Pawn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pawn.h; sourceTree = "<group>"; };
@@ -161,6 +164,8 @@
 				36179EA51D14A16D00DDF777 /* Images.xcassets */,
 				3A85B6211D2D399C0050A5BD /* ChessBoardCustomView.h */,
 				3A85B6221D2D399C0050A5BD /* ChessBoardCustomView.m */,
+				3A91277B1D30005D00E6A662 /* Rating.h */,
+				3A91277C1D30005D00E6A662 /* Rating.m */,
 			);
 			path = ChessGame;
 			sourceTree = "<group>";
@@ -334,6 +339,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A91277D1D30005D00E6A662 /* Rating.m in Sources */,
 				3A96AC441D154EB500DD237A /* Pieces.m in Sources */,
 				36179E961D14888C00DDF777 /* GameViewController.m in Sources */,
 				3A7C58C11D0D876300C06344 /* ViewController.m in Sources */,

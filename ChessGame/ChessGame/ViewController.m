@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "ChessBoardCustomView.h"
+#import "Rating.h"
 
 #if __has_feature(objc_arc)
 #define MDLog(format, ...) CFShow((__bridge CFStringRef)[NSString stringWithFormat:format, ## __VA_ARGS__]);
@@ -77,14 +78,14 @@
     
         [self makeMove:dragMove with:chessBoard];
         [self flipBoard:chessBoard];
-            for(int i = 0;i<8;i++){
-                for(int j=0;j<8;j++){
-                    printf("\"%s\"\t",[chessBoard[i][j] UTF8String]);
-                }
-                printf("\n");
-            }
-        printf("\n\n\n\n");
-        NSLog(@"%@",[self alphaBeta:globalDepth withFirst:1000000 withSecond:-1000000 withThird:@" " withFour:0 withFive:chessBoard]);
+//            for(int i = 0;i<8;i++){
+//                for(int j=0;j<8;j++){
+//                    printf("\"%s\"\t",[chessBoard[i][j] UTF8String]);
+//                }
+//                printf("\n");
+//            }
+//        printf("\n\n\n\n");
+//        NSLog(@"%@",[self alphaBeta:globalDepth withFirst:1000000 withSecond:-1000000 withThird:@" " withFour:0 withFive:chessBoard]);
         [self makeMove:[self alphaBeta:globalDepth withFirst:1000000 withSecond:-1000000 withThird:@" " withFour:0 withFive:chessBoard] with:chessBoard];
         [self flipBoard:chessBoard];
         
@@ -98,7 +99,7 @@
     
     NSString* list=[self posibleMoves:chessBoard];
     if (depth==0 || list.length ==0) {
-        return [NSString stringWithFormat:@"%@%d",move,([self rating]*(player*2-1))];//*(player*2-1))
+        return [NSString stringWithFormat:@"%@%d",move,([[[Rating alloc] init] rating:list.length with:depth withFive:chessBoard with:kingPositionC]*(player*2-1))];//*(player*2-1))
         
     }
    
@@ -119,12 +120,15 @@
         
         [self makeMove:[list substringWithRange:NSMakeRange(i, 5)] with:chessBoard];
         [self flipBoard:chessBoard];
+       
         
 
         NSString* returnString =[self alphaBeta:depth-1 withFirst:beta withSecond:alpha withThird:[list substringWithRange:NSMakeRange(i, 5)] withFour:player withFive:chessBoard];
-        int value = [[returnString substringWithRange:NSMakeRange(5, 1)] intValue];
+        int value = [[returnString substringFromIndex:5] intValue];
+        
       
         [self flipBoard:chessBoard];
+       
         
         [self undoMove:[list substringWithRange:NSMakeRange(i, 5)]with:chessBoard];
         if (player==0) {
@@ -146,12 +150,8 @@
 }
 
 
--(int)rating{
-    return 0;
-//    int a = scores_array[scores_arry_count];
-//    scores_arry_count++;
-//    return a;
-}
+
+
 
 - (void)viewDidLoad {
    
@@ -206,7 +206,7 @@
     
     
   //  [self makeMove:[self alphaBeta:globalDepth withFirst:1000000 withSecond:-1000000 withThird:@" " withFour:0 withFive:chessBoard] with:chessBoard];
-  //  [self flipBoard:chessBoard];
+   // [self flipBoard:chessBoard];
    
    //[chessBoardCustomView drawRect:chessBoardCustomView.frame];
    
@@ -662,12 +662,20 @@
 
 //Possible King Operation
 -(NSString*)posibleA:(int)i with:(__strong NSString* [8][8])chessBoard{
+//        for(int i = 0;i<8;i++){
+//            for(int j=0;j<8;j++){
+//                printf("\"%s\"\t",[chessBoard[i][j] UTF8String]);
+//            }
+//            printf("\n");
+//        }
+//    printf("\n\n\n\n");
     NSString* list=@"";
     NSString*oldPiece;
     int r=i/8, c=i%8;
     for (int j=0; j<9; j++) {
     if (j!=4) {
         if((r-1+j/3) >=0 && (c-1+j%3) >=0){
+            
             
                                      if(((r-1+j/3) >=0) && ((r-1+j/3) <=7) && ((c-1+j%3)>=0) && ((c-1+j%3)<=7)){
                                    BOOL isLowercase = [[NSCharacterSet lowercaseLetterCharacterSet] characterIsMember:[chessBoard[r-1+j/3][c-1+j%3] characterAtIndex:0]];
@@ -691,6 +699,13 @@
                             }
                         }
     }
+//    for(int i = 0;i<8;i++){
+//        for(int j=0;j<8;j++){
+//            printf("\"%s\"\t",[chessBoard[i][j] UTF8String]);
+//        }
+//        printf("\n");
+//    }
+//    printf("\n\n\n\n");
                         //need to add casting later
                         return list;
 }

@@ -15,6 +15,8 @@
 }
 
 @property (weak, nonatomic) IBOutlet ChessBoardCustomView *myBoardView;
-
+-(void)flipBoard:(__strong NSString* [8][8])chessBoard;
+-(NSString*)posibleA:(int)i with:(__strong NSString* [8][8])chessBoard;
+-(BOOL)kingSafe:(__strong NSString* [8][8])chessBoard;
 @end
 
